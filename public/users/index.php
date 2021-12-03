@@ -5,7 +5,7 @@ require dirname(__DIR__, 2) . "/vendor/autoload.php";
 use Portal\Users;
 
 $imagen = (isset($_SESSION['user'])) ?
-    "../" . (new Users)->setUsername($_SESSION['user'])->getImg() : // /img/users/admin.jpg
+    ".." . (new Users)->setUsername($_SESSION['user'])->getImg() : // /img/users/admin.jpg
     "../img/users/invitado.png";
 
 $perfil = -1;
@@ -99,7 +99,6 @@ $usuarios=(new Users)->readAll();
         echo "<td style='color:$color'>{$item->perfil}</td>";
         echo "<td>Acciones</a>";
         echo "</tr>";
-    
       }
    ?>
   </tbody>
