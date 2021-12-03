@@ -145,6 +145,21 @@ class Users extends Conexion{
         parent::$conexion=null;
         return ($stmt->rowCount()!=0);
     }
+    //Existe campo
+    public function existeCampo($n, $v) {
+        $q = "select * from users where $n = :v";
+        $stmt = parent::$conexion->prepare($q);
+
+        try {
+            $stmt->execute([
+                ':v'=>$v
+            ]);
+        } catch (PDOException $ex) {
+            die("Error al comprobar el campo: ".$ex->getMessage());
+        }
+        parent::$conexion = null;
+        return ($stmt->rowCount() != 0);
+    }
 
     //__________________________SETTERS_________________________________________
     

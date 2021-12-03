@@ -97,9 +97,30 @@ $usuarios=(new Users)->readAll();
         echo "<td style='color:$color'>{$item->username}</td>";
         echo "<td style='color:$color'>{$item->email}</td>";
         echo "<td style='color:$color'>{$item->perfil}</td>";
-        echo "<td>Acciones</a>";
+        echo "<td>";
+        if ($perfil == 1) {
+            //todos los botones para usuario admin
+            echo <<< TXT
+            <form name="q" method="POST" action="buser.php">
+            <input type='hidden' name='id' value='{$item->id}' />
+            <a href="eusuario.php?id={$item->id}" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+            <button type='sumbit' class='btn btn-danger' onclick="return confirm('¿Borrar usuario?');"><i class="fas fa-trash"></i></button>
+            </form>
+            TXT;
+        } else if($perfil==0){
+            //boton editar para usuario normal
+            if($_SESSION['user']==$item->username){
+            echo "<a href='eusuario.php?id={$item->id}' class='btn btn-warning'>";
+            echo "<i class='fas fa-edit'></i></a>";
+            }else{
+            }
+        }else{
+            //nada
+            echo "<a href='login.php' class='btn btn-info'><i class='fas fa-sign-in-alt'></i></a>";
+        }
+        echo "</td>";
         echo "</tr>";
-      }
+        }
    ?>
   </tbody>
 </table>
